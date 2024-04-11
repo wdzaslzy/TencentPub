@@ -18,16 +18,16 @@ public class ReadCkafkaAndPrint {
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-
-        System.setProperty(JaasUtils.JAVA_LOGIN_CONFIG_PARAM,
-            "/Users/rodenli/Workspace/wdzaslzy/TencentPub/ckafka/src/main/resources/ckafka_client_jaas.conf");
+//        System.setProperty(JaasUtils.JAVA_LOGIN_CONFIG_PARAM,
+//            "/Users/rodenli/Workspace/wdzaslzy/TencentPub/ckafka/src/main/resources/ckafka_client_jaas.conf");
 
         KafkaSource<String> kafkaSource = KafkaSource.<String>builder()
-            .setBootstrapServers("119.29.50.160:50000")
+            .setBootstrapServers("10.0.16.116:9092")
             .setTopics("lizy_test")
             .setGroupId("lizy_consumer_group")
             .setProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT")
             .setProperty(SaslConfigs.SASL_MECHANISM, "PLAIN")
+            .setProperty(SaslConfigs.SASL_JAAS_CONFIG, "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"ckafka-xjvq5jz9#rodenli\" password=\"LZY8023je@\";")
             .setStartingOffsets(OffsetsInitializer.earliest())
             .setValueOnlyDeserializer(new SimpleStringSchema()).build();
 
@@ -48,8 +48,7 @@ public class ReadCkafkaAndPrint {
         kafkaSourceStream.map(new MapFunction<String, String>() {
             @Override
             public String map(String value) throws Exception {
-                String[] splits = value.split("_");
-                return splits[0] + "_" + Integer.parseInt(splits[1]) * 2;
+                return value;
             }
         }).print();
 
