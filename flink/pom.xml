@@ -16,6 +16,10 @@
     <properties>
         <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
         <scala.version>2.12</scala.version>
         <flink.version>1.16.1</flink.version>
         <flink.cdc.version>2.4.1</flink.cdc.version>
