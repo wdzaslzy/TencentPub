@@ -12,6 +12,7 @@
   <modules>
     <module>flink</module>
     <module>hbase</module>
+    <module>ckafka</module>
   </modules>
 
   <properties>
