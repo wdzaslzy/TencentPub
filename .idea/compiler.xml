@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="flink" />
         <module name="hbase" />
+        <module name="ckafka" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
