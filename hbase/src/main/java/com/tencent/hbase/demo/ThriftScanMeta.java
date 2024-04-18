@@ -15,7 +15,7 @@ public class ThriftScanMeta {
 
     public static void main(String[] args) throws Exception {
         TSocket socket = new TSocket(args[0], Integer.parseInt(args[1]));
-        TTransport transport = new TFramedTransport(socket);
+        TTransport transport = new TFramedTransport(socket, 1213486160);
         TProtocol protocol = new TBinaryProtocol(transport);
 
         THBaseService.Iface client = new THBaseService.Client(protocol);
