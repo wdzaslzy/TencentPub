@@ -10,5 +10,8 @@
         <module name="hbase" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ckafka" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
