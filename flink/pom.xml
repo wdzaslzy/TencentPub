@@ -13,21 +13,6 @@
     <name>flink</name>
     <url>http://maven.apache.org</url>
 
-    <repositories>
-        <!-- emr为荣耀独立构建的仓库 -->
-        <repository>
-            <id>tencentemr-honor-releases</id>
-            <name>releases</name>
-            <url>https://tencentemr-maven.pkg.coding.net/repository/honor/releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <properties>
         <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
