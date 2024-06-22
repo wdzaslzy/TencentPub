@@ -9,6 +9,11 @@ set -eu
 
 export HADOOP_CLASSPATH=$(hadoop classpath)
 
-/usr/local/service/flink-1.16.2/bin/flink run -d -m yarn-cluster \
-   -c com.tencent.flink.ry \
-  /home/hadoop/flink-1.0-SNAPSHOT-jar-with-dependencies.jar
+./bin/flink run -m yarn-cluster -c com.tencent.flink.ry.CheckpointTimeoutExample /home/hadoop/flink-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+
+./bin/flink run -Djava. -m yarn-cluster -c com.tencent.flink.java.WritePublicKafkaExample /home/hadoop/flink-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+env.java.opts.all: "-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=${FLINK_LOG_PREFIX}.hprof"
+
+-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=${FLINK_LOG_PREFIX}.hprof
