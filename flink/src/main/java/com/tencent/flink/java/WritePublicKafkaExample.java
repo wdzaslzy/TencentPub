@@ -21,17 +21,17 @@ public class WritePublicKafkaExample {
         env.setParallelism(1);
 
         KafkaSink<String> kafkaSink = KafkaSink.<String>builder()
-            .setBootstrapServers("xxx:9092")
-            .setProperty("security.protocol", "SASL_PLAINTEXT")
-            .setProperty("sasl.mechanism", "PLAIN")
-            .setProperty("sasl.jaas.config",
-                "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"xxx\" password=\"xxx\";")
-            .setProperty("transaction.timeout.ms", 5 * 60 * 1000 + "")
+//            .setBootstrapServers("xxx:9092")
+//            .setProperty("security.protocol", "SASL_PLAINTEXT")
+//            .setProperty("sasl.mechanism", "PLAIN")
+//            .setProperty("sasl.jaas.config",
+//                "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"xxx\" password=\"xxx\";")
+//            .setProperty("transaction.timeout.ms", 5 * 60 * 1000 + "")
             .setRecordSerializer(KafkaRecordSerializationSchema.builder()
                 .setTopic("dm_adplatform_ad_play_link_inc_s")
                 .setValueSerializationSchema(new SimpleStringSchema())
                 .build())
-            .setDeliveryGuarantee(DeliveryGuarantee.EXACTLY_ONCE)
+//            .setDeliveryGuarantee(DeliveryGuarantee.EXACTLY_ONCE)
             .build();
 
         env.addSource(new RichSourceFunction<String>() {
