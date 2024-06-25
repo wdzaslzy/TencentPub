@@ -14,6 +14,7 @@
     <module>hbase</module>
     <module>ckafka</module>
     <module>hive</module>
+    <module>shells</module>
   </modules>
 
   <properties>
