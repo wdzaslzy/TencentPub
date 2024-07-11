@@ -15,6 +15,7 @@
     <module>ckafka</module>
     <module>hive</module>
     <module>shells</module>
+    <module>flink_scala</module>
   </modules>
 
   <properties>
