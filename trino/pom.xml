@@ -25,5 +25,13 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>io.trino</groupId>
+      <artifactId>trino-jdbc</artifactId>
+      <version>389</version>
+    </dependency>
+
   </dependencies>
+
 </project>
