@@ -16,6 +16,7 @@
     <module>hive</module>
     <module>shells</module>
     <module>flink_scala</module>
+    <module>trino</module>
   </modules>
 
   <properties>
