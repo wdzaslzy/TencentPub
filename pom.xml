@@ -17,6 +17,7 @@
     <module>shells</module>
     <module>flink_scala</module>
     <module>trino</module>
+    <module>zookeeper</module>
   </modules>
 
   <properties>
