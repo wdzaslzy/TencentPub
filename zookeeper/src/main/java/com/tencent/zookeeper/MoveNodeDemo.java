@@ -1,13 +1,41 @@
 package com.tencent.zookeeper;
 
 import java.io.IOException;
-import org.I0Itec.zkclient.ZkClient;
+import org.apache.zookeeper.CreateMode;
+import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher.Event;
+import org.apache.zookeeper.ZooDefs.Ids;
 import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.data.Stat;
 
 public class MoveNodeDemo {
 
-    public static void main(String[] args) throws IOException {
+    /*
+    ./bin/zkCli.sh -server 10.0.16.47
+
+    10.0.16.47:2181
+
+    /rmstore/ZKRMStateRoot/RMAppRoot/application_1721710646053_0002/appattempt_1721710646053_0002_000001
+
+    /rmstore/ZKRMStateRoot/RMAppRoot/application_1721710646053_0003/appattempt_1721710646053_0002_000001
+     */
+
+    public static void main(String[] args)
+        throws IOException, InterruptedException, KeeperException {
+        String zkServers = args[0];
+        String oldPath = args[1];
+        String newPath = args[2];
+
+        ZooKeeper zooKeeper = new ZooKeeper(zkServers, 20000, null);
+
+        byte[] data = zooKeeper.getData(oldPath, false, new Stat());
+
+        zooKeeper.create(newPath, data, Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+
+        zooKeeper.close();
+    }
+
+/*    public static void main(String[] args) throws IOException {
         String zkServers = args[0];
         String oldPath = args[1];
         String newPath = args[2];
@@ -19,7 +47,7 @@ public class MoveNodeDemo {
         zkClient.createPersistent(newPath, data);
 
         zkClient.close();
-    }
+    }*/
 
     private static ZooKeeper connectZkCluster()
         throws IOException {
