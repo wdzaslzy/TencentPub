@@ -19,29 +19,32 @@ public class WritePublicKafkaExample {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
+        env.enableCheckpointing(10_000);
 
         KafkaSink<String> kafkaSink = KafkaSink.<String>builder()
-            .setBootstrapServers("xxx:9092")
+            .setBootstrapServers("106.55.75.94:50000")
             .setProperty("security.protocol", "SASL_PLAINTEXT")
             .setProperty("sasl.mechanism", "PLAIN")
             .setProperty("sasl.jaas.config",
-                "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"xxx\" password=\"xxx\";")
+                "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"-7k5nb74v#\" password=\"@\";")
             .setProperty("transaction.timeout.ms", 5 * 60 * 1000 + "")
             .setRecordSerializer(KafkaRecordSerializationSchema.builder()
-                .setTopic("dm_adplatform_ad_play_link_inc_s")
+                .setTopic("test_shengji")
                 .setValueSerializationSchema(new SimpleStringSchema())
                 .build())
             .setDeliveryGuarantee(DeliveryGuarantee.EXACTLY_ONCE)
+            .setTransactionalIdPrefix("test_shengji_prefix")
             .build();
 
         env.addSource(new RichSourceFunction<String>() {
 
             private JSONObject jsonTemp;
             private LongAdder longAdder;
+            private Integer index;
 
             @Override
             public void open(Configuration parameters) throws Exception {
-                byte[] bytes = Files.readAllBytes(Paths.get(
+                /*byte[] bytes = Files.readAllBytes(Paths.get(
                     this.getClass()
                         .getClassLoader()
                         .getResource("value_2.json")
@@ -49,18 +52,14 @@ public class WritePublicKafkaExample {
                 String jsonValue = new String(bytes, StandardCharsets.UTF_8);
                 jsonTemp = JSON.parseObject(jsonValue);
 
-                longAdder = new LongAdder();
+                longAdder = new LongAdder();*/
             }
 
             @Override
             public void run(SourceContext<String> sourceContext) throws Exception {
                 while (true) {
-                    jsonTemp.put("mediaid", System.nanoTime() + "");
-                    sourceContext.collect(jsonTemp.toString());
-                    longAdder.increment();
-                    if (longAdder.longValue() % 10000 == 0) {
-                        Thread.sleep(500);
-                    }
+                    sourceContext.collect("flink transactional test1 " + (int)(Math.random()*100));
+                    Thread.sleep(1000L);
                 }
             }
 
