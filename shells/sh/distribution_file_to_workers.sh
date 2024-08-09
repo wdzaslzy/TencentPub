@@ -1,9 +1,11 @@
 #!/bin/bash
 
 URL="https://rodenli-1308597516.cos.ap-guangzhou.myqcloud.com/trino/trino_keystore.jks"
-DEST_DIR="/usr/local/service/trino/etc/"
+DEST_DIR="/usr/local/service/trino/etc"
 FILE_NAME="trino_keystore.jks"
 GROUP_NAME="hadoop"
+
+rm /usr/local/service/trino/etc/trino_keystore*
 
 # 下载文件
 echo "Downloading file from $URL..."
